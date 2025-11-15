@@ -1,0 +1,33 @@
+{
+  "generated_at_utc": "2025-11-15T18:00:27.622542+00:00",
+  "repo_path": "C:\\Users\\clove\\OneDrive\\Documents\\Professional\\Applications\\IMC Trading\\codesentry\\codesentry\\example\\bad_code_complex",
+  "pipeline_status": "FAILED",
+  "versions": {
+    "python": "Python 3.13.5",
+    "flake8": "7.1.1 (mccabe: 0.7.0, pycodestyle: 2.12.1, pyflakes: 3.2.0) CPython 3.13.5 on",
+    "bandit": "bandit 1.8.6",
+    "pytest": "pytest 8.3.4",
+    "pylint": "pylint 3.3.5"
+  },
+  "tools": {
+    "flake8": {
+      "tool": "flake8",
+      "exit_code": 1,
+      "duration_sec": 1.295,
+      "output": ".\\app.py:6:1: F401 '.settings.DEFAULT_ADMIN_PASSWORD' imported but unused\n"
+    },
+    "bandit": {
+      "tool": "bandit",
+      "exit_code": 1,
+      "duration_sec": 0.584,
+      "output": "[main]\tINFO\tprofile include tests: None\n[main]\tINFO\tprofile exclude tests: None\n[main]\tINFO\tcli include tests: None\n[main]\tINFO\tcli exclude tests: None\n[main]\tINFO\trunning on Python 3.13.5\nTraceback (most recent call last):\n  File \"C:\\Users\\clove\\anaconda3\\Lib\\site-packages\\bandit\\core\\manager.py\", line 186, in output_results\n    report_func(\n    ~~~~~~~~~~~^\n        self,\n        ^^^^^\n    ...<3 lines>...\n        lines=lines,\n        ^^^^^^^^^^^^\n    )\n    ^\n  File \"C:\\Users\\clove\\anaconda3\\Lib\\site-packages\\bandit\\formatters\\text.py\", line 195, in report\n    wrapped_file.write(result)\n    ~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"C:\\Users\\clove\\anaconda3\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\u274c' in position 411: character maps to <undefined>\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\clove\\anaconda3\\Scripts\\bandit.exe\\__main__.py\", line 7, in <module>\n    sys.exit(main())\n             ~~~~^^\n  File \"C:\\Users\\clove\\anaconda3\\Lib\\site-packages\\bandit\\cli\\main.py\", line 678, in main\n    b_mgr.output_results(\n    ~~~~~~~~~~~~~~~~~~~~^\n        args.context_lines,\n        ^^^^^^^^^^^^^^^^^^^\n    ...<4 lines>...\n        args.msg_template,\n        ^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"C:\\Users\\clove\\anaconda3\\Lib\\site-packages\\bandit\\core\\manager.py\", line 195, in output_results\n    raise RuntimeError(\n    ...<2 lines>...\n    )\nRuntimeError: Unable to output report using 'txt' formatter: 'charmap' codec can't encode character '\\u274c' in position 411: character maps to <undefined>\n"
+    },
+    "pylint": {
+      "tool": "pylint",
+      "exit_code": 22,
+      "duration_sec": 1.865,
+      "output": "************* Module app\napp.py:1:0: C0114: Missing module docstring (missing-module-docstring)\napp.py:4:0: E0611: No name 'db' in module '' (no-name-in-module)\napp.py:5:0: E0611: No name 'services' in module '' (no-name-in-module)\napp.py:6:0: E0402: Attempted relative import beyond top-level package (relative-beyond-top-level)\napp.py:13:0: C0116: Missing function or method docstring (missing-function-docstring)\napp.py:26:11: W0123: Use of eval (eval-used)\napp.py:38:11: W0718: Catching too general exception Exception (broad-exception-caught)\napp.py:53:11: W0718: Catching too general exception Exception (broad-exception-caught)\napp.py:6:0: W0611: Unused DEFAULT_ADMIN_PASSWORD imported from settings (unused-import)\n************* Module db\ndb.py:1:0: C0114: Missing module docstring (missing-module-docstring)\ndb.py:4:0: E0402: Attempted relative import beyond top-level package (relative-beyond-top-level)\ndb.py:7:0: C0116: Missing function or method docstring (missing-function-docstring)\n************* Module services\nservices.py:1:0: C0114: Missing module docstring (missing-module-docstring)\nservices.py:10:16: W1510: 'subprocess.run' used without explicitly defining the value for 'check'. (subprocess-run-check)\nservices.py:27:15: W0718: Catching too general exception Exception (broad-exception-caught)\n************* Module settings\nsettings.py:1:0: C0114: Missing module docstring (missing-module-docstring)\n\n------------------------------------------------------------------\nYour code has been rated at 5.43/10 (previous run: 5.43/10, +0.00)\n\n"
+    }
+  },
+  "ai_summary_markdown": "# Critical Risks\n- **Security**: \n  - Using `eval` in `app.py` (line 26) can lead to code injection vulnerabilities.\n- **Failures/Crashes**:\n  - Bandit reports a `UnicodeEncodeError` indicating potential issues with output handling. Must ensure proper encoding is used.\n\n# High-Value Fixes\n- **Remove Unused Imports**: \n  - Eliminate the unused import of `DEFAULT_ADMIN_PASSWORD` in `app.py` (line 6).\n- **Refactor `eval` Usage**: \n  - Replace `eval` with safer alternatives to prevent security risks.\n- **Catch Specific Exceptions**: \n  - Update broad exception handling in `app.py` (lines 38, 53) and `services.py` (line 27) to target specific exceptions.\n\n# Lint/Style Themes\n- **Missing Documentation**: \n  - Multiple modules lack docstrings across `app.py`, `db.py`, `services.py`, and `settings.py`.\n- **Relative Imports**: \n  - Invalid relative imports detected in `app.py` (lines 6) and `db.py` (line 4).\n- **General Error Handling**: \n  - Repeated use of broad exception handling across different modules.\n\n# Recommended Next Steps\n- **Implement Minimal Test Plan**: \n  - Create unit tests for critical functions, particularly those involving database operations and exception handling.\n- **Address Security Risks**: \n  - Safeguard code against potential vulnerabilities, such as removing `eval` usage.\n- **Enhance Code Quality**: \n  - Add docstrings and refactor for clarity and maintainability.\n- **Resolve Import Errors**: \n  - Correct relative import issues as indicated by pylint."
+}

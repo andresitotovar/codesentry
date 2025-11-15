@@ -1,0 +1,33 @@
+{
+  "generated_at_utc": "2025-11-15T15:16:30.726578+00:00",
+  "repo_path": "C:\\Users\\clove\\OneDrive\\Documents\\Professional\\Applications\\IMC Trading\\codesentry\\codesentry\\example\\bad_code_example",
+  "pipeline_status": "FAILED",
+  "versions": {
+    "python": "Python 3.13.5",
+    "flake8": "7.1.1 (mccabe: 0.7.0, pycodestyle: 2.12.1, pyflakes: 3.2.0) CPython 3.13.5 on",
+    "bandit": "bandit 1.8.6",
+    "pytest": "pytest 8.3.4",
+    "pylint": "pylint 3.3.5"
+  },
+  "tools": {
+    "flake8": {
+      "tool": "flake8",
+      "exit_code": 1,
+      "duration_sec": 0.402,
+      "output": ".\\app.py:1:1: F401 'os' imported but unused\n"
+    },
+    "bandit": {
+      "tool": "bandit",
+      "exit_code": 0,
+      "duration_sec": 0.405,
+      "output": "[main]\tINFO\tprofile include tests: None\n[main]\tINFO\tprofile exclude tests: None\n[main]\tINFO\tcli include tests: None\n[main]\tINFO\tcli exclude tests: None\n[main]\tINFO\trunning on Python 3.13.5\nRun started:2025-11-15 15:16:22.933484\n\nTest results:\n\tNo issues identified.\n\nCode scanned:\n\tTotal lines of code: 11\n\tTotal lines skipped (#nosec): 0\n\tTotal potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0\n\nRun metrics:\n\tTotal issues (by severity):\n\t\tUndefined: 0\n\t\tLow: 0\n\t\tMedium: 0\n\t\tHigh: 0\n\tTotal issues (by confidence):\n\t\tUndefined: 0\n\t\tLow: 0\n\t\tMedium: 0\n\t\tHigh: 0\nFiles skipped (0):\n"
+    },
+    "pylint": {
+      "tool": "pylint",
+      "exit_code": 20,
+      "duration_sec": 0.857,
+      "output": "************* Module app\napp.py:1:0: C0114: Missing module docstring (missing-module-docstring)\napp.py:4:0: C0116: Missing function or method docstring (missing-function-docstring)\napp.py:11:0: C0116: Missing function or method docstring (missing-function-docstring)\napp.py:1:0: W0611: Unused import os (unused-import)\n\n------------------------------------------------------------------\nYour code has been rated at 6.36/10 (previous run: 6.36/10, +0.00)\n\n"
+    }
+  },
+  "ai_summary_markdown": "# Critical Risks\n- **Security:** No security vulnerabilities reported by Bandit.\n- **Failing Tests:** No tests detected; ensure testing framework is implemented.\n- **Crashes:** No issues identified that would directly cause crashes.\n\n# High-Value Fixes\n- **Remove Unused Imports:** Eliminate the `os` import in `app.py` (line 1).\n- **Add Docstrings:** Include module and function docstrings for better clarity and maintainability.\n\n# Lint/Style Themes\n- **Missing Docstrings:** Multiple instances of missing module and function docstrings (C0114, C0116).\n- **Unused Imports:** Consistent indication of unused imports that can be cleaned up (W0611).\n\n# Recommended Next Steps\n- **Immediate Code Cleanup:**\n  - Remove the unused import of `os` in `app.py`.\n  - Add module-level and function-level docstrings.\n- **Implement Testing Framework:**\n  - Establish a minimal test suite, testing core functionality.\n- **Run Linter Again:** After making fixes, re-run flake8 and pylint to ensure all issues are resolved."
+}
